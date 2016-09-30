@@ -7,8 +7,8 @@ angular.module('RestaurantPosWeb').factory 'TablesService', ($resource, $http) -
        'update': { method: 'PUT'}
       })
 
-    create: (table, complete) ->
-      new @service(table: table.attributes()).$save @onServerResponse(complete), @errorHandler
+    create: (complete) ->
+      new @service().$save @onServerResponse(complete), @errorHandler
 
     update: (table, complete) ->
       new @service(table: table.attributes()).$update { id: table.id }, @onServerResponse(complete), @errorHandler

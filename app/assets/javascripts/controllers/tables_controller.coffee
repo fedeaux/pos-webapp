@@ -15,6 +15,12 @@ class TablesController
 
       @updateAuxiliarDataStructures()
 
+  setSelectedTable: (table) =>
+    @selected_table = table
+
+  clearSelectedTable: =>
+    @selected_table = null
+
   updateAuxiliarDataStructures: =>
     @displayable_tables = (table for id, table of @tables)
 

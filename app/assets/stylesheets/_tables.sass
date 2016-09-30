@@ -1,3 +1,6 @@
+#tables-miniatures
+  position: relative
+
 .table-miniatures-item
   +border-radius(4px)
   border: thin $light-gray solid
@@ -33,3 +36,19 @@
     &.available
       .table-drawing
         background-color: green
+
+#table-info-wrapper
+  background-color: $overlay-color
+  position: absolute
+  right: 0
+  top: 0
+  width: 100%
+  padding: 1em
+
+  .table-info
+    +border-radius(4px)
+    border: thin $light-gray solid
+    padding: 1em
+    background-color: white
+    width: 60%
+    margin-left: 20%
