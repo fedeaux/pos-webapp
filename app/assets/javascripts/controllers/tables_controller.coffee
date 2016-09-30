@@ -15,6 +15,11 @@ class TablesController
 
       @updateAuxiliarDataStructures()
 
+  addTable: ->
+    @service.create (response) =>
+      @tables[response.table.id] = new @Table response.table
+      @updateAuxiliarDataStructures()
+
   setSelectedTable: (table) =>
     @selected_table = table
 

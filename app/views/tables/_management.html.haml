@@ -14,7 +14,7 @@
       .table-miniature{ ng_class: '{ "available": {{ table.state == "available"  }}}'}
         .table-drawing {{ table.id }}
 
-    .table-miniatures-item.action
+    .table-miniatures-item.action{ ng_click: 'tables_ctrl.addTable()' }
       %i.ui.large.plus.icon.add-table-button
 
     .clear
