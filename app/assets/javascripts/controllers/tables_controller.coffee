@@ -11,17 +11,26 @@ class TablesController
 
     if response.tables
       for table_attributes in response.tables
-        @tables[table_attributes.id] = new @Table table_attributes
+        @setTable table_attributes
 
       @updateAuxiliarDataStructures()
 
   addTable: ->
-    @service.create (response) =>
-      @tables[response.table.id] = new @Table response.table
-      @updateAuxiliarDataStructures()
+    @service.create @tableUpdated
 
   setSelectedTable: (table) =>
     @selected_table = table
+
+  setSelectedTableState: (state) =>
+    @selected_table.state = state
+    @service.update @selected_table, @tableUpdated
+
+  tableUpdated: (response) =>
+    @setTable response.table
+    @updateAuxiliarDataStructures()
+
+  setTable: (table_attributes) =>
+    @tables[table_attributes.id] = new @Table table_attributes
 
   clearSelectedTable: =>
     @selected_table = null

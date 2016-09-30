@@ -35,7 +35,11 @@
   .table-miniature
     &.available
       .table-drawing
-        background-color: green
+        background-color: $available-table-color
+
+    &.occupied
+      .table-drawing
+        background-color: $occupied-table-color
 
 #table-info-wrapper
   background-color: $overlay-color

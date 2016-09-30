@@ -11,7 +11,9 @@
     .table-miniatures-item.action{ ng_repeat: 'table in tables_ctrl.displayable_tables',
                                    ng_click: 'tables_ctrl.setSelectedTable(table)' }
 
-      .table-miniature{ ng_class: '{ "available": {{ table.state == "available"  }}}'}
+      .table-miniature{ ng_class: '{ "available": {{ table.state == "available" }},
+                                     "occupied":  {{  table.state == "occupied"  }}}'}
+
         .table-drawing {{ table.id }}
 
     .table-miniatures-item.action{ ng_click: 'tables_ctrl.addTable()' }
@@ -26,4 +28,9 @@
           .sub.header {{ tables_ctrl.selected_table.state }}
 
         .ui.buttons
-          .ui.basic.button{ ng_click: 'tables_ctrl.clearSelectedTable()' } Cancel
+          .ui.basic.button{ ng_click: 'tables_ctrl.clearSelectedTable()' } Close
+
+          .ui.yellow.button{ ng_click: 'tables_ctrl.setSelectedTableState("occupied")',
+                             ng_show: 'tables_ctrl.selected_table.state == "available"' } Occupy table
+
+          .ui.green.button{ ng_show: 'tables_ctrl.selected_table.state == "occupied"' } Check
