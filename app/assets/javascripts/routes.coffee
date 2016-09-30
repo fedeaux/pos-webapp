@@ -27,9 +27,10 @@ angular.module('RestaurantPosWeb')
     views:
       menu:
         templateUrl: '/templates/menu/index'
+
   ).state('app.restaurant'
     views:
       'dashboard@':
         templateUrl: '/templates/restaurant/index'
-        controller: 'DashboardController as dashboard_ctrl'
+        controller: 'RestaurantController as restaurant_ctrl'
   )

@@ -1,0 +1,5 @@
+#restaurant-setup-wrapper{ ng_hide: 'restaurant_ctrl.restaurant.initialized'}
+  = render 'restaurant/setup'
+
+#restaurant-management-wrapper{ ng_show: 'restaurant_ctrl.restaurant.initialized'}
+  = render 'restaurant/management'
