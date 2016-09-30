@@ -1,0 +1,16 @@
+%h1.centered= "The awesome POSTaurant"
+
+.ui.centered.stackable.doubling.grid
+  .four.wide.column
+    %h3= t('.sign_in', :default => "Sign in")
+
+    .form{ class: "ui form"}
+      .field
+        = label_tag :email
+        = email_field_tag :email, nil, autofocus: true, class: "form-control", ng_model: 'users_ctrl.credentials.email'
+
+      .field
+        = label_tag :password
+        = password_field_tag :password, nil, autocomplete: "off", ng_model: 'users_ctrl.credentials.password'
+
+      = submit_tag t('.sign_in', :default => "Sign in"), class: "ui primary button", ng_click: 'users_ctrl.login()'

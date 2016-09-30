@@ -1,0 +1,8 @@
+asset 'moment'
+asset 'jquery'
+asset 'angular', '1.5.3'
+asset 'angular-resource', '1.5.3'
+asset 'angular-ui-router'
+asset 'angular-cookie'
+asset 'angular-touch'
+asset 'ng-token-auth'
