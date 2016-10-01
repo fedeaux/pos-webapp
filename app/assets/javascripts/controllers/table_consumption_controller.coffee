@@ -12,7 +12,16 @@ class TableConsumptionController
 
   loadConsumption: ->
     @consumption = null
-    @consumptions_service.fromTable @table, @setConsumption
+    console.log @table.state, (@table.state == 'available')
+    if @table.state == 'available'
+      @clearConsumption()
+    else
+      @consumptions_service.fromTable @table, @setConsumption
+
+  clearConsumption: ->
+    @consumption = null
+    @products = []
+    @payment = []
 
   setConsumption: (response) =>
     @consumption = new @Consumption response.consumption

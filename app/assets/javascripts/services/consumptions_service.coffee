@@ -4,7 +4,7 @@ angular.module('RestaurantPosWeb').factory 'ConsumptionsService', ($resource, $h
       super @errorHandler, 'consumption', 'consumptions', 'v1/tables/:table_id/consumption/:action'
 
     fromTable: (table, complete) ->
-      new @service().$get table_id: table.id, @onServerResponse complete
+      new @service().$get table_id: table.id, @onServerResponse(complete)
 
     addProduct: (table, product, complete) ->
       @actionOnProduct table, product, 'add_product', complete
