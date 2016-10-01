@@ -1,0 +1,6 @@
+.consumption-list-wrapper
+  .ui.tiny.blue.message{ ng_show: 'consumption_ctrl.products.length == 0' }
+    No consumption yet
+
+  = render 'products/simple_list', source: 'consumption_ctrl.products', remove_action: 'consumption_ctrl.removeProduct(product)'
+  = render 'products/picker', product_selected: 'consumption_ctrl.addProduct(product)'

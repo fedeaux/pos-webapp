@@ -20,6 +20,7 @@ class TablesController
 
   setSelectedTable: (table) =>
     @selected_table = table
+    @scope.$broadcast 'TablesController::TableSelected', table: @selected_table
 
   setSelectedTableState: (state) =>
     @selected_table.state = state

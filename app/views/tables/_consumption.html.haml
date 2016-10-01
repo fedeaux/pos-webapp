@@ -1,0 +1,21 @@
+#table-consumption-wrapper{ ng_controller: 'TableConsumptionController as consumption_ctrl' }
+  .ui.two.column.grid
+    .column
+      .ui.pointing.two.item.fluid.menu
+        %a.item{ ng_class: '{"active": consumption_ctrl.view_state == "consumption" }',
+                 ng_click: 'consumption_ctrl.view_state = "consumption"' } Consumption
+
+        %a.item{ ng_class: '{"active": consumption_ctrl.view_state == "payment" }',
+                 ng_click: 'consumption_ctrl.view_state = "payment"'} Payment
+
+      .ui.hidden.divider
+
+      #consumption-products-wrapper{ ng_show: 'consumption_ctrl.view_state == "consumption"' }
+        = render 'consumption/products'
+
+      #consumption-payments-wrapper{ ng_show: 'consumption_ctrl.view_state == "payment"' }
+        = render 'consumption/payments'
+
+    .column
+
+  .ui.divider

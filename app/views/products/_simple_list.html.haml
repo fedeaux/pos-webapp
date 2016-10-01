@@ -1,0 +1,11 @@
+- remove_action ||= nil
+
+%table.ui.compact.table#products-list{ ng_show: "#{source}.length > 0" }
+  %tbody
+    %tr.product-list-item{ ng_repeat: "product in #{source} track by $index" }
+      %td {{ product.name }}
+      %td {{ product.price }}
+      %td
+        - if remove_action
+          .action{ ng_click: "#{remove_action}" }
+            %i.red.remove.icon

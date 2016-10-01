@@ -1,0 +1,14 @@
+.table-info
+  %h3.ui.header
+    Table {{ tables_ctrl.selected_table.id }}
+    .sub.header {{ tables_ctrl.selected_table.state }}
+
+  = render 'tables/consumption'
+
+  .ui.buttons
+    .ui.basic.button{ ng_click: 'tables_ctrl.clearSelectedTable()' } Close
+
+    .ui.yellow.button{ ng_click: 'tables_ctrl.setSelectedTableState("occupied")',
+                       ng_show: 'tables_ctrl.selected_table.state == "available"' } Occupy table
+
+    .ui.green.button{ ng_show: 'tables_ctrl.selected_table.state == "occupied"' } Check
