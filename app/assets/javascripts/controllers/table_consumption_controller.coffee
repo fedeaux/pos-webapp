@@ -2,6 +2,7 @@ class TableConsumptionController
   constructor: (@scope, @state, @Payment, @Consumption, @ConsumptionsService) ->
     window.ctrl = @
     @scope.$on 'TablesController::TableSelected', @tableSelected
+    @scope.$on 'TablesController::TableOccupied', @loadConsumption
     @consumptions_service = new @ConsumptionsService
     @view_state = 'consumption'
 
@@ -10,7 +11,7 @@ class TableConsumptionController
       @table = data.table
       @loadConsumption()
 
-  loadConsumption: ->
+  loadConsumption: =>
     @consumption = null
     if @table.state == 'available'
       @clearConsumption()

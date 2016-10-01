@@ -27,7 +27,7 @@
                    ng_change: "consumption_ctrl.update()",
                    ng_options: "waiter.name for waiter in restaurant_ctrl.waiters track by waiter.id"}
 
-      .ui.green.large.bottom-right.button{ ng_show: 'tables_ctrl.selected_table.state == "occupied"' } Release table
+      .ui.green.large.bottom-right.button Release table
 
   .occupy-table-button-wrapper{ ng_show: 'consumption_ctrl.table.state == "available"' }
     .ui.fluid.small.green.message This is table is available

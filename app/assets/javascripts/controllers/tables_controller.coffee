@@ -23,6 +23,7 @@ class TablesController
     @scope.$broadcast 'TablesController::TableSelected', table: @selected_table
 
   setSelectedTableState: (state) =>
+    @previous_table_state = @selected_table.state
     @selected_table.state = state
     @service.update @selected_table, @tableUpdated
 
@@ -30,8 +31,15 @@ class TablesController
     @setTable response.table
     @updateAuxiliarDataStructures()
 
+    if @previous_table_state == 'available' and @selected_table.state == 'occupied'
+      @previous_table_state = null
+      @scope.$broadcast 'TablesController::TableOccupied'
+
   setTable: (table_attributes) =>
     @tables[table_attributes.id] = new @Table table_attributes
+
+    if @selected_table and @selected_table.id == table_attributes.id
+      @selected_table = @tables[table_attributes.id]
 
   clearSelectedTable: =>
     @selected_table = null
