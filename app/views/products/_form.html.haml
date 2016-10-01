@@ -1,0 +1,23 @@
+%form.ui.form
+  .field
+    = label :product, :code, 'Code'
+    = text_field :product, :code, ng_model: "products_ctrl.form_product.code"
+
+  .field
+    = label :product, :name, 'Name'
+    = text_field :product, :name, ng_model: "products_ctrl.form_product.name"
+
+  .field
+    = label :product, :price, 'Price'
+    = text_field :product, :price, ng_model: "products_ctrl.form_product.price"
+
+  .field
+    = label :product, :category, 'Category'
+    %label{ ng_repeat: "category in products_ctrl.available_categories" }
+      %input{ ng_model: "products_ctrl.form_product.category", type: "radio", value: "{{ category.id }}"}
+      {{ category.name }}
+
+  .field
+    .ui.buttons
+      .ui.basic.button{ ng_click: 'products_ctrl.clearFormProduct() '} Cancel
+      .ui.primary.button{ ng_click: 'products_ctrl.saveFormProduct() '} Save
