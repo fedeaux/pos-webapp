@@ -3,4 +3,7 @@
     Table {{ tables_ctrl.selected_table.id }}
     .sub.header {{ tables_ctrl.selected_table.state }}
 
+  .top-right.action
+    %i.ui.remove.icon{ ng_click: 'tables_ctrl.clearSelectedTable()' }
+
   = render 'tables/consumption'

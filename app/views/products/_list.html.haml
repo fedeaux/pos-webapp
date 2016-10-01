@@ -12,7 +12,7 @@
       %td {{ product.id }}
       %td {{ product.code }}
       %td {{ product.name }}
-      %td {{ product.price }}
+      %td {{ product.price | currency }}
       %td
         .ui.basic.mini.buttons
           .ui.icon.action.button{ ng_click: 'products_ctrl.setFormProduct(product)' }

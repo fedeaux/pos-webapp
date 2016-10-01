@@ -12,7 +12,6 @@ class TableConsumptionController
 
   loadConsumption: ->
     @consumption = null
-    console.log @table.state, (@table.state == 'available')
     if @table.state == 'available'
       @clearConsumption()
     else
@@ -41,9 +40,10 @@ class TableConsumptionController
   addProduct: (product) ->
     @consumptions_service.addProduct @table, product, @setConsumption
 
-  saveFormPayment: ->
-    @consumptions_service.addPayment @table, @form_payment, @setConsumption
-    @form_payment = null
+  saveFormPayment: (form) ->
+    if form.$valid
+      @consumptions_service.addPayment @table, @form_payment, @setConsumption
+      @form_payment = null
 
   removeProduct: (product) ->
     @consumptions_service.removeProduct @table, product, @setConsumption
@@ -54,7 +54,7 @@ class TableConsumptionController
   setPaymentForm: =>
     @form_payment = new @Payment
 
-  clearPaymentForm: =>
+  clearFormPayment: ->
     @form_payment = null
 
 TableConsumptionController.$inject = ['$scope', '$state', 'Payment', 'Consumption', 'ConsumptionsService']

@@ -1,14 +1,12 @@
 #table-consumption-wrapper{ ng_controller: 'TableConsumptionController as consumption_ctrl' }
-  .ui.two.column.grid
+  .ui.two.column.grid{ ng_hide: 'consumption_ctrl.table.state == "available"' }
     .column
-      .ui.pointing.two.item.fluid.menu
+      .ui.text.two.item.fluid.menu
         %a.item{ ng_class: '{"active": consumption_ctrl.view_state == "consumption" }',
                  ng_click: 'consumption_ctrl.view_state = "consumption"' } Consumption
 
         %a.item{ ng_class: '{"active": consumption_ctrl.view_state == "payment" }',
                  ng_click: 'consumption_ctrl.view_state = "payment"'} Payment
-
-      .ui.hidden.divider
 
       #consumption-products-wrapper{ ng_show: 'consumption_ctrl.view_state == "consumption"' }
         = render 'consumption/products'
@@ -21,10 +19,10 @@
 
       .ui.divider
 
-      .ui.fluid.buttons
-        .ui.basic.button{ ng_click: 'tables_ctrl.clearSelectedTable()' } Close
+      .ui.green.large.bottom-right.button{ ng_show: 'tables_ctrl.selected_table.state == "occupied"' } Release table
 
-        .ui.yellow.button{ ng_click: 'tables_ctrl.setSelectedTableState("occupied")',
-                           ng_show: 'tables_ctrl.selected_table.state == "available"' } Occupy table
+  .occupy-table-button-wrapper{ ng_show: 'consumption_ctrl.table.state == "available"' }
+    .ui.fluid.small.green.message This is table is available
 
-        .ui.green.button{ ng_show: 'tables_ctrl.selected_table.state == "occupied"' } Check
+    .ui.huge.fluid.yellow.button{ ng_click: 'tables_ctrl.setSelectedTableState("occupied")',
+                                  ng_show: 'tables_ctrl.selected_table.state == "available"' } Occupy table

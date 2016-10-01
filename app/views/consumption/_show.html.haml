@@ -6,11 +6,11 @@
 
     %tr
       %td Total Price
-      %td {{ consumption_ctrl.consumption.total_price }}
+      %td {{ consumption_ctrl.consumption.total_price | currency }}
 
     %tr
       %td Payed Value
-      %td {{ consumption_ctrl.consumption.payed_value }}
+      %td {{ consumption_ctrl.consumption.payed_value | currency }}
 
     %tr
       %td Tip
@@ -20,9 +20,9 @@
           %i.ui.purple.frown.icon
 
         .yes-tip{ ng_show: 'consumption_ctrl.consumption.expected_tip > 0' }
-          {{ consumption_ctrl.consumption.expected_tip }}
+          {{ consumption_ctrl.consumption.expected_tip | currency }}
           %i.ui.green.smile.icon
 
     %tr
       %td Discount
-      %td {{ consumption_ctrl.consumption.expected_discount }}
+      %td {{ consumption_ctrl.consumption.expected_discount | currency }}

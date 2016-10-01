@@ -2,17 +2,18 @@
   .ui.tiny.blue.message{ ng_show: 'consumption_ctrl.payments.length == 0' }
     No payments yet
 
-  .ui.primary.button{ ng_click: 'consumption_ctrl.setPaymentForm()' } Add payment
+  .ui.primary.button{ ng_click: 'consumption_ctrl.setPaymentForm()',
+                      ng_hide: 'consumption_ctrl.form_payment' } Add payment
+
+  .consumption-payment-form-wrapper{ ng_show: 'consumption_ctrl.form_payment' }
+    = render 'payments/form'
 
   %table.ui.very.compact.table
     %tbody
       %tr.payment-list-item{ ng_repeat: 'payment in consumption_ctrl.payments' }
         %td.created_at {{ payment.created_at }}
-        %td.value ${{ payment.value }}
+        %td.value {{ payment.value | currency }}
         %td.observations {{ payment.observations }}
         %td
           .action
             %i.ui.red.remove.icon{ ng_click: 'consumption_ctrl.removePayment(payment)' }
-
-  .consumption-payment-form-wrapper{ ng_show: 'consumption_ctrl.form_payment' }
-    = render 'payments/form'
