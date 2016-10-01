@@ -33,4 +33,11 @@ angular.module('RestaurantPosWeb')
       'dashboard@':
         templateUrl: '/templates/restaurant/index'
         controller: 'RestaurantController as restaurant_ctrl'
+
+  ).state('app.products'
+    url: '/products'
+    views:
+      'dashboard@':
+        templateUrl: '/templates/products/index'
+        controller: 'ProductsController as products_ctrl'
   )

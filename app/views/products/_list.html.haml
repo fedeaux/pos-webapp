@@ -1,0 +1,19 @@
+%table.ui.compact.table#products-list
+  %thead
+    %tr
+      %th ID
+      %th Code
+      %th Name
+      %th Price
+      %th Actions
+
+  %tbody
+    %tr.product-list-item{ ng_repeat: 'product in products_ctrl.displayable_products' }
+      %td {{ product.id }}
+      %td {{ product.code }}
+      %td {{ product.name }}
+      %td {{ product.price }}
+      %td
+        .ui.basic.mini.buttons
+          .ui.icon.action.button{ ng_click: 'products_ctrl.setFormProduct(product)' }
+            %i.ui.edit.icon

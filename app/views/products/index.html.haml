@@ -1,0 +1,6 @@
+#products-list-wrapper{ ng_hide: 'products_ctrl.form_product' }
+  .ui.primary.button{ ng_click: 'products_ctrl.setBlankFormProduct(productForm)' } Add new product
+  = render 'products/list'
+
+#products-form-wrapper{ ng_show: 'products_ctrl.form_product' }
+  = render 'products/form'
