@@ -8,6 +8,10 @@
     "angular-ui-router": "latest",
     "angular-cookie": "latest",
     "angular-touch": "latest",
-    "ng-token-auth": "latest"
+    "ng-token-auth": "latest",
+    "angular-messages": "latest"
+  },
+  "resolutions": {
+    "angular": "1.5.3"
   }
 }

@@ -10,6 +10,12 @@ angular.module('RestaurantPosWeb').factory 'Product', ($resource) ->
         else
           @[name] = default_value
 
+      if @category.id
+        @category_id = @category.id
+
+      if @price
+        @price = parseFloat @price
+
     isPersisted: ->
       !! @id
 
@@ -17,9 +23,10 @@ angular.module('RestaurantPosWeb').factory 'Product', ($resource) ->
       attr =
         id: null
         name: null
-        price: null
+        price: 0
         code: null
-        category: null
+        category_id: null
+        category: {}
 
       attr
 

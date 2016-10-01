@@ -1,23 +1,70 @@
-%form.ui.form
-  .field
+%form.ui.form{ novalidate: true, name: 'productForm' }
+  .field{ ng_class: "{ 'error' : productForm['product[code]'].$touched && productForm['product[code]'].$invalid }" }
     = label :product, :code, 'Code'
-    = text_field :product, :code, ng_model: "products_ctrl.form_product.code"
+    = text_field :product, :code, { ng_model: "products_ctrl.form_product.code",
+                                    required: true,
+                                    ng_minlength: 3,
+                                    ng_maxlength: 255 }
 
-  .field
+    .ui.pointing.red.label.error-messages{ ng_messages: "productForm['product[code]'].$error" }
+      .error{ ng_message: :required } Please provide a code for this product.
+      .error{ ng_message: :minlength }
+        The code must contain at least 3 characters.
+        ({{ productForm['product[code]'].$viewValue.length }})
+
+      .error{ ng_message: :maxlength }
+        The code must contain at most 255 characters.
+        ({{ productForm['product[code]'].$viewValue.length }})
+
+  .field{ ng_class: "{ 'error' : productForm['product[name]'].$touched && productForm['product[name]'].$invalid }" }
     = label :product, :name, 'Name'
-    = text_field :product, :name, ng_model: "products_ctrl.form_product.name"
+    = text_field :product, :name, { ng_model: "products_ctrl.form_product.name",
+                                    required: true,
+                                    ng_minlength: 3,
+                                    ng_maxlength: 255 }
 
-  .field
+    .ui.pointing.red.label.error-messages{ ng_messages: "productForm['product[name]'].$error" }
+      .error{ ng_message: :required } Please provide a name for this product.
+      .error{ ng_message: :minlength }
+        The name must contain at least 3 characters.
+        ({{ productForm['product[name]'].$viewValue.length }})
+
+      .error{ ng_message: :maxlength }
+        The name must contain at most 255 characters.
+        ({{ productForm['product[name]'].$viewValue.length }})
+
+  .field{ ng_class: "{ 'error' : productForm['product[price]'].$touched && productForm['product[price]'].$invalid }" }
     = label :product, :price, 'Price'
-    = text_field :product, :price, ng_model: "products_ctrl.form_product.price"
+    = text_field :product, :price, { type: "number",
+                                     required: true,
+                                     ng_model: "products_ctrl.form_product.price",
+                                     min: '0',
+                                     step: '0.01' }
 
-  .field
+    .ui.pointing.red.label.error-messages{ ng_messages: "productForm['product[price]'].$error" }
+      .error{ ng_message: :required } Please provide a price for this product.
+      .error{ ng_message: :min } The price must be positive
+      .error{ ng_message: :number } This does not look like a number
+
+  .field{ ng_class: "{ 'error' : productForm['product[category_id]'].$touched && productForm['product[category_id]'].$invalid }" }
     = label :product, :category, 'Category'
     %label{ ng_repeat: "category in products_ctrl.available_categories" }
-      %input{ ng_model: "products_ctrl.form_product.category", type: "radio", value: "{{ category.id }}"}
+      %input{ ng_model: "products_ctrl.form_product.category_id",
+              type: "radio",
+              value: "{{ category.id }}",
+              required: true }
       {{ category.name }}
+
+    .ui.pointing.red.label.error-messages{ ng_messages: "productForm['product[category]'].$error" }
+      .error{ ng_message: :required } Please select one.
 
   .field
     .ui.buttons
-      .ui.basic.button{ ng_click: 'products_ctrl.clearFormProduct() '} Cancel
-      .ui.primary.button{ ng_click: 'products_ctrl.saveFormProduct() '} Save
+      .ui.basic.button{ ng_click: 'products_ctrl.clearFormProduct(productForm)',
+                        ng_hide: 'products_ctrl.form_product.isPersisted()'} Cancel
+
+      .ui.basic.button{ ng_click: 'products_ctrl.cancelProductEdit(productForm)',
+                        ng_show: 'products_ctrl.form_product.isPersisted()'} Cancel
+
+      .ui.primary.button{ ng_click: 'products_ctrl.saveFormProduct(productForm)',
+                          ng_class: "{ 'disabled' : productForm.$invalid }" } Save

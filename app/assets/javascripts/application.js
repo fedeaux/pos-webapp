@@ -15,6 +15,7 @@
 //= require angular-resource/angular-resource
 //= require angular-ui-router/release/angular-ui-router
 //= require angular-cookie/angular-cookie
+//= require angular-messages
 //= require ng-token-auth/dist/ng-token-auth
 //= require angular-touch/angular-touch
 //= require moment/min/moment.min

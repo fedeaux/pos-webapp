@@ -37,20 +37,34 @@ class ProductsController
   updateAuxiliarDataStructures: =>
     @displayable_products = (product for id, product of @products)
 
-  setFormProduct: (product) ->
+  setFormProduct: (product, form) ->
+    if product and product.isPersisted()
+      @original_form_product = angular.copy product
+
     @form_product = product
+    form.$setPristine() if form
 
-  setBlankFormProduct: ->
-    @setFormProduct new @Product
+  setBlankFormProduct: (form) ->
+    @setFormProduct (new @Product), form
 
-  clearFormProduct: ->
-    @setFormProduct null
+  cancelProductEdit: (form) ->
+    if @original_form_product
+      @products[@original_form_product.id] = @original_form_product
+      @updateAuxiliarDataStructures()
 
-  saveFormProduct: =>
-    if @form_product.isPersisted()
-      @service.update @form_product, @productUpdated
-    else
-      @service.create @form_product, @productUpdated
+    @clearFormProduct form
+
+  clearFormProduct: (form) ->
+    @original_form_product = null
+    @setFormProduct null, form
+
+  saveFormProduct: (form) =>
+    if form.$valid
+      form.$setPristine()
+      if @form_product.isPersisted()
+        @service.update @form_product, @productUpdated
+      else
+        @service.create @form_product, @productUpdated
 
 ProductsController.$inject = ['$scope', '$state', 'Product', 'ProductsService', 'ProductCategoriesService']
 angular.module('RestaurantPosWeb').controller 'ProductsController', ProductsController
