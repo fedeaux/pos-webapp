@@ -1,0 +1,15 @@
+%table.ui.compact.table#waiters-list
+  %thead
+    %tr
+      %th ID
+      %th Name
+      %th Actions
+
+  %tbody
+    %tr.waiter-list-item{ ng_repeat: 'waiter in waiters_ctrl.displayable_waiters' }
+      %td {{ waiter.id }}
+      %td {{ waiter.name }}
+      %td
+        .ui.basic.mini.buttons
+          .ui.icon.action.button{ ng_click: 'waiters_ctrl.setFormWaiter(waiter)' }
+            %i.ui.edit.icon

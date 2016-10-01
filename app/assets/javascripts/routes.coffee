@@ -40,4 +40,11 @@ angular.module('RestaurantPosWeb')
       'dashboard@':
         templateUrl: '/templates/products/index'
         controller: 'ProductsController as products_ctrl'
+
+  ).state('app.waiters'
+    url: '/waiters'
+    views:
+      'dashboard@':
+        templateUrl: '/templates/waiters/index'
+        controller: 'WaitersController as waiters_ctrl'
   )
