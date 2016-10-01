@@ -1,0 +1,38 @@
+#table-consumption-wrapper{ ng_controller: 'TableConsumptionController as consumption_ctrl' }
+  .ui.two.column.grid{ ng_hide: 'consumption_ctrl.table.state == "available"' }
+    .column
+      .ui.text.two.item.fluid.menu
+        %a.item{ ng_class: '{"active": consumption_ctrl.view_state == "consumption" }',
+                 ng_click: 'consumption_ctrl.view_state = "consumption"' } Consumption
+
+        %a.item{ ng_class: '{"active": consumption_ctrl.view_state == "payment" }',
+                 ng_click: 'consumption_ctrl.view_state = "payment"'} Payment
+
+      #consumption-products-wrapper{ ng_show: 'consumption_ctrl.view_state == "consumption"' }
+        = render 'consumption/products'
+
+      #consumption-payments-wrapper{ ng_show: 'consumption_ctrl.view_state == "payment"' }
+        = render 'consumption/payments'
+
+    .column
+      = render 'consumption/show'
+
+      .ui.divider
+
+      %form.ui.form
+        .field
+          %label Waiter
+          %select{ name: "consumption[waiter]",
+                   ng_model: "consumption_ctrl.consumption.waiter",
+                   ng_change: "consumption_ctrl.update()",
+                   ng_options: "waiter.name for waiter in restaurant_ctrl.waiters track by waiter.id"}
+
+      .ui.green.large.bottom-right.button{ ng_click: "consumption_ctrl.finish()",
+                                           ng_hide: "consumption_ctrl.consumption.state == 'payed'"  } Finish Service
+
+      .ui.green.large.bottom-right.button{ ng_click: "tables_ctrl.setSelectedTableState('available')",
+                                           ng_show: "consumption_ctrl.consumption.state == 'payed'" } Release table
+
+  .occupy-table-button-wrapper{ ng_show: 'consumption_ctrl.table.state == "available"' }
+    .ui.fluid.small.green.message This is table is available
+    .ui.huge.fluid.yellow.button{ ng_click: 'tables_ctrl.setSelectedTableState("occupied")' } Occupy table

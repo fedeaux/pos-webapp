@@ -1,0 +1,7 @@
+%table.ui.compact.table.product-picker
+  %tbody
+    %tr.products-picker-item.action{ ng_repeat: 'product in restaurant_ctrl.products',
+                                     ng_click: "#{product_selected}" }
+      %td {{ product.code }}
+      %td {{ product.name }}
+      %td {{ product.price | currency }}
