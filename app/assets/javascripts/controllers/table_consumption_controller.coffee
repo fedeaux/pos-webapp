@@ -1,5 +1,5 @@
 class TableConsumptionController
-  constructor: (@scope, @state, @ConsumptionsService) ->
+  constructor: (@scope, @state, @Payment, @Consumption, @ConsumptionsService) ->
     window.ctrl = @
     @scope.$on 'TablesController::TableSelected', @tableSelected
     @consumptions_service = new @ConsumptionsService
@@ -15,25 +15,38 @@ class TableConsumptionController
     @consumptions_service.fromTable @table, @setConsumption
 
   setConsumption: (response) =>
+    @consumption = new @Consumption response.consumption
     @products = response.consumption.products
     @payments = response.consumption.payments
 
+    @products.sort (p1, p2) ->
+      n1 = p1.name.toLowerCase()
+      n2 = p2.name.toLowerCase()
+      if n1 < n2
+        -1
+      else if n1 > n2
+        1
+      else
+        0
+
   addProduct: (product) ->
-    @consumptions_service.addProduct @table, product, =>
-      @products.push product
-      @products.sort (p1, p2) ->
-        n1 = p1.name.toLowerCase()
-        n2 = p2.name.toLowerCase()
-        if n1 < n2
-          -1
-        else if n1 > n2
-          1
-        else
-          0
+    @consumptions_service.addProduct @table, product, @setConsumption
+
+  saveFormPayment: ->
+    @consumptions_service.addPayment @table, @form_payment, @setConsumption
+    @form_payment = null
 
   removeProduct: (product) ->
-    @consumptions_service.removeProduct @table, product, =>
-      @products.splice @products.indexOf(product), 1
+    @consumptions_service.removeProduct @table, product, @setConsumption
 
-TableConsumptionController.$inject = ['$scope', '$state', 'ConsumptionsService']
+  removePayment: (payment) ->
+    @consumptions_service.removePayment @table, payment, @setConsumption
+
+  setPaymentForm: =>
+    @form_payment = new @Payment
+
+  clearPaymentForm: =>
+    @form_payment = null
+
+TableConsumptionController.$inject = ['$scope', '$state', 'Payment', 'Consumption', 'ConsumptionsService']
 angular.module('RestaurantPosWeb').controller 'TableConsumptionController', TableConsumptionController

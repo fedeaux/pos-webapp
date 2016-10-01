@@ -1,7 +1,7 @@
 angular.module('RestaurantPosWeb').factory 'ConsumptionsService', ($resource, $http, ResourceService) ->
   class ConsumptionsService extends ResourceService
     constructor: ->
-      super @errorHandler, 'consumption', 'consumptions', '/v1/tables/:table_id/consumption/:action'
+      super @errorHandler, 'consumption', 'consumptions', 'v1/tables/:table_id/consumption/:action'
 
     fromTable: (table, complete) ->
       new @service().$get table_id: table.id, @onServerResponse complete
@@ -11,6 +11,14 @@ angular.module('RestaurantPosWeb').factory 'ConsumptionsService', ($resource, $h
 
     removeProduct: (table, product, complete) ->
       @actionOnProduct table, product, 'remove_product', complete
+
+    addPayment: (table, payment, complete) ->
+      new @service(consumption: { payment: payment.attributes() }).$update { table_id: table.id, action: 'add_payment' },
+        @onServerResponse(complete), @errorHandler
+
+    removePayment: (table, payment, complete) ->
+      new @service(consumption: { payment_id: payment.id }).$update { table_id: table.id, action: 'remove_payment' },
+        @onServerResponse(complete), @errorHandler
 
     actionOnProduct: (table, product, action, complete) ->
       new @service(consumption: { product_id: product.id }).$update { table_id: table.id, action: action },
