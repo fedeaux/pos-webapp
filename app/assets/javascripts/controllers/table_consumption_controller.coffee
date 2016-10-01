@@ -1,5 +1,5 @@
 class TableConsumptionController
-  constructor: (@scope, @state, @Payment, @Consumption, @ConsumptionsService) ->
+  constructor: (@scope, @state, @filter, @Payment, @Consumption, @ConsumptionsService) ->
     window.ctrl = @
     @scope.$on 'TablesController::TableSelected', @tableSelected
     @scope.$on 'TablesController::TableOccupied', @loadConsumption
@@ -61,5 +61,15 @@ class TableConsumptionController
   update: ->
     @consumptions_service.update @table, @consumption, @setConsumption
 
-TableConsumptionController.$inject = ['$scope', '$state', 'Payment', 'Consumption', 'ConsumptionsService']
+  finish: ->
+    if @consumption.expected_discount > 0
+      formatted = @filter('currency') @consumption.expected_discount
+
+      unless confirm("The payment is below the total cost by #{formatted}, do you want to consider it a discount?")
+        return
+
+    @consumption.state = 'payed'
+    @update()
+
+TableConsumptionController.$inject = ['$scope', '$state', '$filter', 'Payment', 'Consumption', 'ConsumptionsService']
 angular.module('RestaurantPosWeb').controller 'TableConsumptionController', TableConsumptionController

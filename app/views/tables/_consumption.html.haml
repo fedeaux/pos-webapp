@@ -27,10 +27,12 @@
                    ng_change: "consumption_ctrl.update()",
                    ng_options: "waiter.name for waiter in restaurant_ctrl.waiters track by waiter.id"}
 
-      .ui.green.large.bottom-right.button Release table
+      .ui.green.large.bottom-right.button{ ng_click: "consumption_ctrl.finish()",
+                                           ng_hide: "consumption_ctrl.consumption.state == 'payed'"  } Finish Service
+
+      .ui.green.large.bottom-right.button{ ng_click: "tables_ctrl.setSelectedTableState('available')",
+                                           ng_show: "consumption_ctrl.consumption.state == 'payed'" } Release table
 
   .occupy-table-button-wrapper{ ng_show: 'consumption_ctrl.table.state == "available"' }
     .ui.fluid.small.green.message This is table is available
-
-    .ui.huge.fluid.yellow.button{ ng_click: 'tables_ctrl.setSelectedTableState("occupied")',
-                                  ng_show: 'tables_ctrl.selected_table.state == "available"' } Occupy table
+    .ui.huge.fluid.yellow.button{ ng_click: 'tables_ctrl.setSelectedTableState("occupied")' } Occupy table
