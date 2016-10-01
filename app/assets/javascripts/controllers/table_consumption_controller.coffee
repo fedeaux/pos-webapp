@@ -57,5 +57,8 @@ class TableConsumptionController
   clearFormPayment: ->
     @form_payment = null
 
+  update: ->
+    @consumptions_service.update @table, @consumption, @setConsumption
+
 TableConsumptionController.$inject = ['$scope', '$state', 'Payment', 'Consumption', 'ConsumptionsService']
 angular.module('RestaurantPosWeb').controller 'TableConsumptionController', TableConsumptionController

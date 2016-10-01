@@ -23,6 +23,7 @@ angular.module('RestaurantPosWeb').factory 'Consumption', ($resource) ->
         total_price: 0
         payed_value: 0
         state: null
+        waiter: {}
 
       attr
 
@@ -36,5 +37,7 @@ angular.module('RestaurantPosWeb').factory 'Consumption', ($resource) ->
 
       for name, default_value of @defaultAttributes()
         attr[name] = @[name]
+
+      attr.waiter_id = @waiter.id if @waiter.id
 
       attr

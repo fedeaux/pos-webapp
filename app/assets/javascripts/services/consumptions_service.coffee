@@ -3,6 +3,9 @@ angular.module('RestaurantPosWeb').factory 'ConsumptionsService', ($resource, $h
     constructor: ->
       super @errorHandler, 'consumption', 'consumptions', 'v1/tables/:table_id/consumption/:action'
 
+    update: (table, consumption, complete) ->
+      new @service(consumption: consumption.attributes()).$update { table_id: table.id }, @onServerResponse(complete)
+
     fromTable: (table, complete) ->
       new @service().$get table_id: table.id, @onServerResponse(complete)
 

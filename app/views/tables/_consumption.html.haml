@@ -19,6 +19,14 @@
 
       .ui.divider
 
+      %form.ui.form
+        .field
+          %label Waiter
+          %select{ name: "consumption[waiter]",
+                   ng_model: "consumption_ctrl.consumption.waiter",
+                   ng_change: "consumption_ctrl.update()",
+                   ng_options: "waiter.name for waiter in restaurant_ctrl.waiters track by waiter.id"}
+
       .ui.green.large.bottom-right.button{ ng_show: 'tables_ctrl.selected_table.state == "occupied"' } Release table
 
   .occupy-table-button-wrapper{ ng_show: 'consumption_ctrl.table.state == "available"' }
