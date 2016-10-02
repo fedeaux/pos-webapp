@@ -18,7 +18,8 @@
 //= require angular-messages
 //= require ng-token-auth/dist/ng-token-auth
 //= require angular-touch/angular-touch
-//= require moment/min/moment.min
+//= require checklist-model
+//= require moment
 //= require semantic_ui/semantic_ui
 //= require turbolinks
 //= require index

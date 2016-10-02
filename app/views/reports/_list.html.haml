@@ -1,0 +1,13 @@
+%table.ui.compact.table#reports-list
+  %thead
+    %tr
+      %th ID
+      %th Digest
+
+  %tbody
+    %tr.report-list-item{ ng_repeat: 'report in reports_ctrl.displayable_reports' }
+      %td {{ report.id }}
+      %td
+        = link_to '', ng_href: '#/reports/{{ report.id }}' do
+          .line {{ report.formatted_start }} &gt; {{ report.formatted_finish }}
+          .line {{ report.list_reporters }}
