@@ -7,9 +7,8 @@ class TableConsumptionController
     @view_state = 'consumption'
 
   tableSelected: (event, data) =>
-    unless @table and @table.id == data.table.id
-      @table = data.table
-      @loadConsumption()
+    @table = data.table
+    @loadConsumption()
 
   loadConsumption: =>
     @consumption = null
