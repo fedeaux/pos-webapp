@@ -12,5 +12,8 @@ class ReportController
     @report = new @Report response.report
     @results = response.results
 
+  downloadAsPdf: ->
+    @service.downloadAsPdf @report
+
 ReportController.$inject = ['$scope', '$state', '$stateParams', 'Report', 'MonthlyTimeRange', 'ReportsService']
 angular.module('RestaurantPosWeb').controller 'ReportController', ReportController

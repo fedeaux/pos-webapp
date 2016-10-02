@@ -1,6 +1,6 @@
 .ui.basic.buttons
   = link_to "&lt;&lt; All reports".html_safe, '#/reports', class: 'ui button'
-  = link_to '#/reports', class: 'ui button' do
+  .ui.button{ ng_click: 'report_ctrl.downloadAsPdf()' }
     %i.ui.red.file.pdf.outline.icon
 
 .ui.divider

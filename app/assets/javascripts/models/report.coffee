@@ -29,7 +29,10 @@ angular.module('RestaurantPosWeb').factory 'Report', ($resource) ->
       @moment_updated_at = moment @updated_at
       @formatted_updated_at = @moment_updated_at.format(DateFormats.day_month_and_year)
 
-      @list_reporters = @reporters.join ', '
+      @list_reporters = @reporters.map((reporter) ->
+        parts = reporter.split('::')
+        parts[parts.length - 1]
+      ).join ', '
 
     isPersisted: ->
       !! @id
