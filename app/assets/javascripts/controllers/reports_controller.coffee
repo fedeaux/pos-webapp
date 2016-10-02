@@ -1,8 +1,6 @@
 class ReportsController
   constructor: (@scope, @state, @Report, @MonthlyTimeRange, @ReportsService) ->
-    window.ctrl = @
     @service = new @ReportsService
-
     @form_report = null
     @loadReports()
 

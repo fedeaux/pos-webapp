@@ -1,0 +1,13 @@
+.reporter-wrapper{ ng_show: 'report_ctrl.report.reporters.indexOf("Reporters::Products") > -1' }
+  %h3.ui.header Products
+
+  .ui.form
+    .ui.two.fields
+      .field
+        A total of {{ report_ctrl.results['Reporters::Products'].total_sales }} products were sold.
+
+      .field
+        %label Most popular products
+        .product{ ng_repeat: "product in report_ctrl.results['Reporters::Products'].popular_products" }
+          {{ product.product.name }} with
+          {{ product.amount }} sales.

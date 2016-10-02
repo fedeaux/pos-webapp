@@ -23,6 +23,12 @@ angular.module('RestaurantPosWeb').factory 'Report', ($resource) ->
       @moment_finish = moment @finish
       @formatted_finish = @moment_finish.format(DateFormats.day_month_and_year)
 
+      @moment_created_at = moment @created_at
+      @formatted_created_at = @moment_created_at.format(DateFormats.day_month_and_year)
+
+      @moment_updated_at = moment @updated_at
+      @formatted_updated_at = @moment_updated_at.format(DateFormats.day_month_and_year)
+
       @list_reporters = @reporters.join ', '
 
     isPersisted: ->
