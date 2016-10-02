@@ -1,0 +1,6 @@
+#waiters-list-wrapper{ ng_hide: 'waiters_ctrl.form_waiter' }
+  .ui.primary.button{ ng_click: 'waiters_ctrl.setBlankFormWaiter(waiterForm)' } Add new waiter
+  = render 'waiters/list'
+
+#waiters-form-wrapper{ ng_show: 'waiters_ctrl.form_waiter' }
+  = render 'waiters/form'

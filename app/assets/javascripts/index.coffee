@@ -2,7 +2,7 @@
   db_day: 'YYYY-MM-DD'
   pretty_day: 'ddd, MMM Do'
 
-angular.module('RestaurantPosWeb', ['ngResource', 'ui.router', 'ng-token-auth'])
+angular.module('RestaurantPosWeb', ['ngResource', 'ngMessages', 'ui.router', 'ng-token-auth' ])
   .config ($authProvider) ->
     $authProvider.configure
       apiUrl: config.api_url

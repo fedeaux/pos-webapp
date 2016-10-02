@@ -1,0 +1,25 @@
+#tables-management-wrapper{ ng_controller: 'TablesController as tables_ctrl' }
+  .ui.hidden.divider
+
+  .ui.mini.olive.message{ ng_show: 'tables_ctrl.displayable_tables.length == 0' }
+    .header You don't have any table yet.
+    Click the "+" button below to add one.
+
+  .ui.divider
+
+  #tables-miniatures
+    .table-miniatures-item.action{ ng_repeat: 'table in tables_ctrl.displayable_tables',
+                                   ng_click: 'tables_ctrl.setSelectedTable(table)' }
+
+      .table-miniature{ ng_class: '{ "available": {{ table.state == "available" }},
+                                     "occupied":  {{  table.state == "occupied"  }}}'}
+
+        .table-drawing {{ table.id }}
+
+    .table-miniatures-item.action{ ng_click: 'tables_ctrl.addTable()' }
+      %i.ui.large.plus.icon.add-table-button
+
+    .clear
+
+    #table-info-wrapper{ ng_show: 'tables_ctrl.selected_table' }
+      = render 'tables/info'

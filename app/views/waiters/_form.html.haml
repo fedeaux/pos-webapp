@@ -1,0 +1,28 @@
+%form.ui.form{ novalidate: true, name: 'waiterForm' }
+  .field{ ng_class: "{ 'error' : waiterForm['waiter[name]'].$touched && waiterForm['waiter[name]'].$invalid }" }
+    = label :waiter, :name, 'Name'
+    = text_field :waiter, :name, { ng_model: "waiters_ctrl.form_waiter.name",
+                                    required: true,
+                                    ng_minlength: 3,
+                                    ng_maxlength: 255 }
+
+    .ui.pointing.red.label.error-messages{ ng_messages: "waiterForm['waiter[name]'].$error" }
+      .error{ ng_message: :required } Please provide a name for this waiter.
+      .error{ ng_message: :minlength }
+        The name must contain at least 3 characters.
+        ({{ waiterForm['waiter[name]'].$viewValue.length }})
+
+      .error{ ng_message: :maxlength }
+        The name must contain at most 255 characters.
+        ({{ waiterForm['waiter[name]'].$viewValue.length }})
+
+  .field
+    .ui.buttons
+      .ui.basic.button{ ng_click: 'waiters_ctrl.clearFormWaiter(waiterForm)',
+                        ng_hide: 'waiters_ctrl.form_waiter.isPersisted()'} Cancel
+
+      .ui.basic.button{ ng_click: 'waiters_ctrl.cancelWaiterEdit(waiterForm)',
+                        ng_show: 'waiters_ctrl.form_waiter.isPersisted()'} Cancel
+
+      .ui.primary.button{ ng_click: 'waiters_ctrl.saveFormWaiter(waiterForm)',
+                          ng_class: "{ 'disabled' : waiterForm.$invalid }" } Save

@@ -1,0 +1,59 @@
+#tables-miniatures
+  position: relative
+
+.table-miniatures-item
+  +border-radius(4px)
+  border: thin $light-gray solid
+  float: left
+  height: 6rem
+  width: 6rem
+  margin: 0.5rem
+
+  .add-table-button, .table-miniature
+    margin: $default-distance/2 !important
+    padding: $default-distance/2
+    width: 5rem
+    height: 5rem
+    text-align: center
+
+  .add-table-button
+    line-height: 5rem !important
+    vertial-align: middle !important
+
+  .table-drawing
+    +border-radius(0.8rem)
+    background-color: $table-brown
+    color: white
+    display: inline-block
+    font-size: 1.2rem
+    height: 4rem
+    line-height: 4rem
+    text-align: center
+    vertial-align: middle
+    width: 4rem
+
+  .table-miniature
+    &.available
+      .table-drawing
+        background-color: $available-table-color
+
+    &.occupied
+      .table-drawing
+        background-color: $occupied-table-color
+
+#table-info-wrapper
+  background-color: $overlay-color
+  position: absolute
+  right: 0
+  top: 0
+  width: 100%
+  padding: 1em
+
+  .table-info
+    +border-radius(4px)
+    background-color: white
+    border: thin $light-gray solid
+    margin-left: 5%
+    padding: $default-distance
+    position: relative
+    width: 90%

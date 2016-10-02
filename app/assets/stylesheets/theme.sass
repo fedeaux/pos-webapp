@@ -1,8 +1,9 @@
-@import 'compass/css3'
+@import 'compass'
+@import 'variables'
 
 #dashboard
-  padding: 1em
-  padding-top: 3em
+  padding: $default-distance
+  padding-top: 3 * $default-distance
 
 .clear
   clear: both
@@ -10,3 +11,27 @@
 h1, h2, h3, h4, h5, h6
   &.centered
     text-align: center
+
+.action
+  +opacity(0.7)
+  cursor: pointer
+
+  &:hover
+    +opacity(1)
+
+.top-right
+  position: absolute
+  top: $default-distance
+  right: $default-distance
+
+  .icon
+    margin: 0 !important
+
+.bottom-right
+  position: absolute
+  bottom: $default-distance
+  right: $default-distance
+
+@import 'forms'
+@import 'tables'
+@import 'consumption'

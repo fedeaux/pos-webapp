@@ -1,0 +1,9 @@
+.ui.centered.stackable.doubling.grid
+  .four.wide.column
+    %form.ui.form
+      .field
+        = label :restaurant, :name, 'Name'
+        = text_field :restaurant, :name, ng_model: 'restaurant_ctrl.restaurant.name'
+
+      .field
+        .ui.primary.button{ ng_click: 'restaurant_ctrl.save()' } Save
