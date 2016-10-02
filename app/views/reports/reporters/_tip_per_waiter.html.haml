@@ -1,0 +1,7 @@
+.reporter-wrapper{ ng_show: 'report_ctrl.report.reporters.indexOf("Reporters::TipPerWaiter") > -1' }
+  %h3.ui.header Tip per Waiter
+
+  %table.ui.definition.table
+    %tr{ ng_repeat: "tip_info in report_ctrl.results['Reporters::TipPerWaiter'].tip_per_waiter" }
+      %td {{ tip_info.waiter.name }}
+      %td {{ tip_info.value | currency }}

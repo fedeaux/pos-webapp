@@ -1,0 +1,39 @@
+.ui.basic.buttons
+  = link_to "&lt;&lt; All reports".html_safe, '#/reports', class: 'ui button'
+  .ui.button{ ng_click: 'report_ctrl.downloadAsPdf()' }
+    %i.ui.red.file.pdf.outline.icon
+
+.ui.divider
+
+.ui.form
+  .ui.two.column.grid
+    .column
+      .field
+        %label Start
+        {{ report_ctrl.report.formatted_start }}
+
+      .field
+        %label Finish
+        {{ report_ctrl.report.formatted_finish }}
+
+      .field
+        %label Reporters
+        {{ report_ctrl.report.list_reporters }}
+
+    .column
+      .field
+        %label Created at
+        {{ report_ctrl.report.formatted_created_at }}
+
+      .field
+        %label Updated At
+        {{ report_ctrl.report.formatted_updated_at }}
+
+.ui.divider
+
+-# This is a small break in the Open Closed principle. But, again, so little time :(
+= render 'reports/reporters/sales'
+.ui.hidden.divider
+= render 'reports/reporters/tip_per_waiter'
+.ui.hidden.divider
+= render 'reports/reporters/products'
