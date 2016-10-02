@@ -32,8 +32,10 @@ class TablesController
     @updateAuxiliarDataStructures()
 
     if @previous_table_state == 'available' and @selected_table.state == 'occupied'
-      @previous_table_state = null
       @scope.$broadcast 'TablesController::TableOccupied'
+
+    @previous_table_state = null
+    @scope.$broadcast 'TablesController::TableSelected', table: @selected_table
 
   setTable: (table_attributes) =>
     @tables[table_attributes.id] = new @Table table_attributes
