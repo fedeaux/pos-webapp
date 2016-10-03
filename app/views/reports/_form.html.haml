@@ -1,0 +1,51 @@
+%form.ui.form{ novalidate: true, name: 'reportForm' }
+  .ui.three.fields
+    .field
+      = label :report, :start, 'Start'
+      %select{ name: "report[start]",
+               ng_model: "reports_ctrl.form_report.start",
+               ng_options: "option[0] for option in reports_ctrl.time_range.start_options track by option[1]"}
+
+    .field
+      = label :report, :finish, 'Finish'
+      %select{ name: "report[finish]",
+               ng_model: "reports_ctrl.form_report.finish",
+               ng_options: "option[0] for option in reports_ctrl.time_range.finish_options track by option[1]"}
+
+    .field
+      = label :report, :reporters, 'Reporters'
+
+      .checkbox-wrapper{ ng_repeat: 'reporter in reports_ctrl.reporters' }
+        %input{ type: :checkbox,
+                checklist_value: 'reporter',
+                checklist_model: 'reports_ctrl.form_report.reporters' }
+
+        %label {{ reporter }}
+
+  -# .field{ ng_class: "{ 'error' : reportForm['report[name]'].$touched && reportForm['report[name]'].$invalid }" }
+  -#   = label :report, :name, 'Name'
+  -#   = text_field :report, :name, { ng_model: "reports_ctrl.form_report.name",
+  -#                                   required: true,
+  -#                                   ng_minlength: 3,
+  -#                                   ng_maxlength: 255 }
+
+  -#   .ui.pointing.red.label.error-messages{ ng_messages: "reportForm['report[name]'].$error" }
+  -#     .error{ ng_message: :required } Please provide a name for this report.
+  -#     .error{ ng_message: :minlength }
+  -#       The name must contain at least 3 characters.
+  -#       ({{ reportForm['report[name]'].$viewValue.length }})
+
+  -#     .error{ ng_message: :maxlength }
+  -#       The name must contain at most 255 characters.
+  -#       ({{ reportForm['report[name]'].$viewValue.length }})
+
+  .field
+    .ui.buttons
+      .ui.basic.button{ ng_click: 'reports_ctrl.clearFormReport(reportForm)',
+                        ng_hide: 'reports_ctrl.form_report.isPersisted()'} Cancel
+
+      .ui.basic.button{ ng_click: 'reports_ctrl.cancelReportEdit(reportForm)',
+                        ng_show: 'reports_ctrl.form_report.isPersisted()'} Cancel
+
+      .ui.primary.button{ ng_click: 'reports_ctrl.saveFormReport(reportForm)',
+                          ng_class: "{ 'disabled' : reportForm.$invalid }" } Save

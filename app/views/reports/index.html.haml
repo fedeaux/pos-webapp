@@ -1,0 +1,6 @@
+#reports-list-wrapper{ ng_hide: 'reports_ctrl.form_report.model' }
+  .ui.primary.button{ ng_click: 'reports_ctrl.setBlankFormReport(reportForm)' } Add new report
+  = render 'reports/list'
+
+#reports-form-wrapper{ ng_show: 'reports_ctrl.form_report.model' }
+  = render 'reports/form'

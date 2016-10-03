@@ -1,0 +1,38 @@
+.ui.form.reporter-wrapper{ ng_show: 'report_ctrl.report.reporters.indexOf("Reporters::Sales") > -1' }
+  %h3.ui.header Sales
+
+  .ui.five.fields
+    .field
+      %label Products total value
+      {{ report_ctrl.results['Reporters::Sales'].sold_products_total_value | currency }}
+
+      .ui.small.message
+        The sum of the price of all sold products. Here we don't see the income not received because of discounts.
+
+    .field
+      %label Total in discount
+      {{ report_ctrl.results['Reporters::Sales'].discounts | currency }}
+
+      .ui.small.message
+        The sum of the values of every discount given.
+
+    .field
+      %label Total income
+      {{ report_ctrl.results['Reporters::Sales'].total_income | currency }}
+
+      .ui.small.message
+        The actual value received considering discounts, but don't considering waiters tips.
+
+    .field
+      %label Total in tips
+      {{ report_ctrl.results['Reporters::Sales'].total_in_tips | currency }}
+
+      .ui.small.message
+        The sum of income that must be given to the waiters.
+
+    .field
+      %label House income
+      {{ report_ctrl.results['Reporters::Sales'].house_income | currency }}
+
+      .ui.small.message
+        The income after considering discounts and waiters tips.
