@@ -14,6 +14,7 @@ class TableConsumptionController
     @consumption = null
     if @table.state == 'available'
       @clearConsumption()
+
     else
       @consumptions_service.fromTable @table, @setConsumption
 

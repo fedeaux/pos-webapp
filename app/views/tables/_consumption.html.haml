@@ -1,5 +1,5 @@
 #table-consumption-wrapper{ ng_controller: 'TableConsumptionController as consumption_ctrl' }
-  .ui.two.column.grid{ ng_hide: 'consumption_ctrl.table.state == "available"' }
+  .ui.two.column.grid{ ng_hide: 'consumption_ctrl.table.state == "available" || !consumption_ctrl.consumption' }
     .column
       .ui.text.two.item.fluid.menu
         %a.item{ ng_class: '{"active": consumption_ctrl.view_state == "consumption" }',
@@ -30,9 +30,10 @@
       .ui.green.large.bottom-right.button{ ng_click: "consumption_ctrl.finish()",
                                            ng_hide: "consumption_ctrl.consumption.state == 'payed'"  } Finish Service
 
-      .ui.green.large.bottom-right.button{ ng_click: "tables_ctrl.setSelectedTableState('available')",
-                                           ng_show: "consumption_ctrl.consumption.state == 'payed'" } Release table
-
   .occupy-table-button-wrapper{ ng_show: 'consumption_ctrl.table.state == "available"' }
     .ui.fluid.small.green.message This is table is available
     .ui.huge.fluid.yellow.button{ ng_click: 'tables_ctrl.setSelectedTableState("occupied")' } Occupy table
+
+  .release-table-button-wrapper{ ng_show: 'consumption_ctrl.table.state == "occupied" && (!consumption_ctrl.consumption || consumption_ctrl.consumption.state == "payed" )' }
+    .ui.fluid.small.yellow.message This is table is occupied
+    .ui.huge.fluid.green.button{ ng_click: 'tables_ctrl.setSelectedTableState("available")' } Release table

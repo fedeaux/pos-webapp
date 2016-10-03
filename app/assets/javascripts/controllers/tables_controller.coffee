@@ -34,8 +34,9 @@ class TablesController
     if @previous_table_state == 'available' and @selected_table.state == 'occupied'
       @scope.$broadcast 'TablesController::TableOccupied'
 
-    @previous_table_state = null
-    @scope.$broadcast 'TablesController::TableSelected', table: @selected_table
+    if @selected_table and @selected_table.id == response.table.id
+      @previous_table_state = null
+      @scope.$broadcast 'TablesController::TableSelected', table: @selected_table
 
   setTable: (table_attributes) =>
     @tables[table_attributes.id] = new @Table table_attributes
